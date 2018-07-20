@@ -10,7 +10,6 @@ import { LikeListComponent } from './components/like-list/like-list.component';
   declarations: [
     AppComponent,
     RestaurantCardComponent,
-    LikesListComponent,
     DislikeListComponent,
     LikeListComponent
   ],
