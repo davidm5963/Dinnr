@@ -7,18 +7,32 @@ import { DislikeListComponent } from './components/dislike-list/dislike-list.com
 import { LikeListComponent } from './components/like-list/like-list.component';
 import { RestaurantCardListComponent } from './components/restaurant-card-list/restaurant-card-list.component';
 
+import { environment } from '../environments/environment';
+import { AgmCoreModule } from '@agm/core';
+
+import { LocationService } from './services/location.service';
+import { RestaurantService } from './services/restaurant.service';
+
+
 @NgModule({
   declarations: [
     AppComponent,
     RestaurantCardComponent,
     DislikeListComponent,
     LikeListComponent,
-    RestaurantCardListComponent
+    RestaurantCardListComponent,
+    
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AgmCoreModule.forRoot({
+      apiKey: environment.GOOGLE_API_KEY
+    })
   ],
-  providers: [],
+  providers: [
+    LocationService,
+    RestaurantService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
