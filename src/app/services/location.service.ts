@@ -6,11 +6,9 @@ import { Injectable } from '@angular/core';
 export class LocationService {
 
   constructor() { 
-    this.getUserLocation();
   }
 
-
-  private getUserLocation() {
+  getUserLocation() {
    /// locate the user
    if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
