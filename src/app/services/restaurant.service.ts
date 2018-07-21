@@ -1,21 +1,25 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { Http, Headers } from '@angular/http';
+import { HttpClient, HttpHandler, HttpHeaders, HttpParams } from '@angular/common/http';
+
 import { map } from 'rxjs/operators';
+import { Restaurant } from '../models/restaurant.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RestaurantService {
 
-  private API_KEY: string = environment.GOOGLE_API_KEY;
-  private API_URL: string = environment.GOOGLE_PLACES_API_URL;
+  private API_KEY: string = environment.ZOMATO_API_KEY;
+  private API_URL: string = environment.ZOMATO_API_URL;
 
-  constructor(private http: Http) { }
-
-  getNearbyRestaurants(location: any){
-    this.http.get(this.API_URL+`&location=${location.lat},${location.lng}j`).pipe(
-      map(result => result.json())
-    )
+  constructor(private http: HttpClient) { 
   }
+
+  getNearbyRestaurants(lat: number, lng: number){
+
+    let headers = new HttpHeaders().append('user-key',  this.API_KEY);    
+
+    return this.http.get<Restaurant[]>(this.API_URL+`&start=20&lat=${lat}&lon=${lng}&radius=100000`, {headers: headers});
+    }
 }
