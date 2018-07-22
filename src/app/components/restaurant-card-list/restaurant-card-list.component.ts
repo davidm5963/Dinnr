@@ -30,11 +30,16 @@ export class RestaurantCardListComponent implements OnInit, AfterViewInit {
         allowedDirections: [Direction.LEFT, Direction.RIGHT],
         // Now need to send offsetX and offsetY with element instead of just offset
         throwOutConfidence: (offsetX, offsetY, element) => {
-          return Math.min(Math.max(Math.abs(offsetX) / (element.offsetWidth / 1.7), Math.abs(offsetY) / (element.offsetHeight / 2)), 1);
+          let throwPercentage = Math.min(Math.max(Math.abs(offsetX) / (element.offsetWidth / 1), Math.abs(offsetY) / (element.offsetHeight / 2)), 1);
+          console.log("THROW PERCECNTAGE: " + throwPercentage)
+          if(throwPercentage == 1){
+            element.setAttribute("style", "visibility: hidden; transition: .2s;");
+          }
+          return throwPercentage;
         },
         throwOutDistance: (d) => {
-          return 800;
-        }
+          return 1000;
+        },
     }
 
     this.getRestaurants();
