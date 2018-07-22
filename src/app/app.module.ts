@@ -14,6 +14,8 @@ import { AgmCoreModule } from '@agm/core';
 import { LocationService } from './services/location.service';
 import { RestaurantService } from './services/restaurant.service';
 
+import { SwingModule } from 'angular2-swing'
+
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { RestaurantService } from './services/restaurant.service';
     HttpClientModule,
     AgmCoreModule.forRoot({
       apiKey: environment.GOOGLE_API_KEY
-    })
+    }),
+    SwingModule
   ],
   providers: [
     LocationService,
