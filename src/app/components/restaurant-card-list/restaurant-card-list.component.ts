@@ -30,11 +30,8 @@ export class RestaurantCardListComponent implements OnInit, AfterViewInit {
         allowedDirections: [Direction.LEFT, Direction.RIGHT],
         // Now need to send offsetX and offsetY with element instead of just offset
         throwOutConfidence: (offsetX, offsetY, element) => {
-          let throwPercentage = Math.min(Math.max(Math.abs(offsetX) / (element.offsetWidth / 1), Math.abs(offsetY) / (element.offsetHeight / 2)), 1);
+          let throwPercentage = Math.min(Math.max(Math.abs(offsetX) / (element.offsetWidth / 1), Math.abs(offsetY) / (element.offsetHeight / 1)), 1);
           console.log("THROW PERCECNTAGE: " + throwPercentage)
-          if(throwPercentage == 1){
-            element.setAttribute("style", "visibility: hidden; transition: .2s;");
-          }
           return throwPercentage;
         },
         throwOutDistance: (d) => {
@@ -71,6 +68,8 @@ export class RestaurantCardListComponent implements OnInit, AfterViewInit {
   // on the HTML element - see the template above
   onThrowOut(event: ThrowEvent) {
     console.log('Hook from the template', event.throwDirection);
+    //make element hidden once thrown out
+    event.target.setAttribute("style", "visibility: hidden; transition: .2s; ");
   }
     
   ngOnInit() {
