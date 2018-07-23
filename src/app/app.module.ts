@@ -31,7 +31,7 @@ import { SwingModule } from 'angular2-swing'
     BrowserModule,
     HttpClientModule,
     AgmCoreModule.forRoot({
-      apiKey: environment.GOOGLE_API_KEY
+      apiKey: environment.google.GOOGLE_API_KEY
     }),
     SwingModule,
     MatCardModule,
