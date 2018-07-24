@@ -31,7 +31,13 @@ export class RestaurantCardListComponent implements OnInit, AfterViewInit {
         // Now need to send offsetX and offsetY with element instead of just offset
         throwOutConfidence: (offsetX, offsetY, element) => {
           let throwPercentage = Math.min(Math.max(Math.abs(offsetX) / (element.offsetWidth / 1), Math.abs(offsetY) / (element.offsetHeight / 1)), 1);
-          console.log("THROW PERCECNTAGE: " + throwPercentage)
+          console.log("THROW PERCECNTAGE: " + throwPercentage + Direction);
+          console.log("Offset right: " + offsetX);
+          console.log("Offset down: " + offsetY);
+
+          element.getElementsByClassName("overlay").item(0).setAttribute("style", `opacity: ${throwPercentage.toString()}; 
+                                                                                   background-color: ${offsetX > 100 ? 'rgba(34, 212, 24, .5)' : 'rgba(214, 29, 24, .5)'}`)
+
           return throwPercentage;
         },
         throwOutDistance: (d) => {
@@ -40,7 +46,6 @@ export class RestaurantCardListComponent implements OnInit, AfterViewInit {
     }
 
     this.getRestaurants();
-    
   }
 
   ngAfterViewInit() {
@@ -67,9 +72,12 @@ export class RestaurantCardListComponent implements OnInit, AfterViewInit {
   // This method is called by hooking up the event
   // on the HTML element - see the template above
   onThrowOut(event: ThrowEvent) {
-    console.log('Hook from the template', event.throwDirection);
+    event.target.setAttribute("style", "visibility: hidden; transition: .1s; ");
+    
+    if(event.throwDirection == Direction.RIGHT){
+      this.restaurantService.addToLikes(event.target.getAttribute('class'))
+    }
     //make element hidden once thrown out
-    event.target.setAttribute("style", "visibility: hidden; transition: .2s; ");
   }
     
   ngOnInit() {
