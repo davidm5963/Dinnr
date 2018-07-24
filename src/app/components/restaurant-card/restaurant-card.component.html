@@ -1,5 +1,8 @@
 <div *ngIf="restaurant">
   <mat-card>
+      <div *ngFor="let item of images">
+          <img mat-card-image [src]="item">
+      </div>
     <mat-card-title>
       {{restaurant.name}}
     </mat-card-title>
@@ -9,9 +12,8 @@
     <mat-card-subtitle class="rating" [ngClass]="{'good' : restaurant.user_rating.aggregate_rating > 3.5 }">
         {{restaurant.user_rating.aggregate_rating}}
       </mat-card-subtitle>
+
   </mat-card>
 
-  <div *ngFor="let image of images | async">
-    <img src=image.thumbnailUrl>
-  </div>
+
 </div>
