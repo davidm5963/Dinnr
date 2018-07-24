@@ -19,6 +19,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 import { SwingModule } from 'angular2-swing';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 import * as firebase from 'firebase/app';
 
@@ -42,6 +43,7 @@ import * as firebase from 'firebase/app';
     AngularFirestoreModule,
     SwingModule,
     MatCardModule,
+    MDBBootstrapModule.forRoot();
   ],
   providers: [
     LocationService,
