@@ -43,7 +43,7 @@ import * as firebase from 'firebase/app';
     AngularFirestoreModule,
     SwingModule,
     MatCardModule,
-    MDBBootstrapModule.forRoot();
+    MDBBootstrapModule.forRoot()
   ],
   providers: [
     LocationService,
