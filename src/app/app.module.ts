@@ -15,7 +15,12 @@ import { AgmCoreModule } from '@agm/core';
 import { LocationService } from './services/location.service';
 import { RestaurantService } from './services/restaurant.service';
 
-import { SwingModule } from 'angular2-swing'
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+
+import { SwingModule } from 'angular2-swing';
+
+import * as firebase from 'firebase/app';
 
 
 @NgModule({
@@ -33,12 +38,15 @@ import { SwingModule } from 'angular2-swing'
     AgmCoreModule.forRoot({
       apiKey: environment.google.GOOGLE_API_KEY
     }),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
     SwingModule,
     MatCardModule,
   ],
   providers: [
     LocationService,
-    RestaurantService
+    RestaurantService,
+    
   ],
   bootstrap: [AppComponent]
 })
