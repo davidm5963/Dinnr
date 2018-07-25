@@ -10,8 +10,7 @@
       width: 100%;
       list-style: none;
       position: absolute;
-      text-align: center;
-      cursor: default; }
+      text-align: center;}
 
 .overlay{
   opacity: 0;
