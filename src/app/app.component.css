@@ -1,0 +1,13 @@
+.like-list-wrapper{
+    background-color: #ccc;
+    z-index: 1;
+}
+
+.card-wrapper{
+    background-color: red;
+    z-index: 0;
+}
+
+.row{
+    height: 100%;
+}
