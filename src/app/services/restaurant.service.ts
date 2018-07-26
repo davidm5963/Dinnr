@@ -41,5 +41,14 @@ export class RestaurantService {
       this.afs.collection("likes").doc(restaurantId).set({restaurantId: restaurantId});
   }
 
-  
+  getLikes(){   
+    return this.likes = this.afs.collection('likes', ref => ref.orderBy('restaurantId'));  
+   }
+ 
+   getRestaurantDetails(restaurantId: string){
+     let headers = new HttpHeaders().append('user-key',  this.API_KEY);        
+     console.log(this.http.get<Restaurant>(`https://developers.zomato.com/api/v2.1/restaurant?res_id=${restaurantId}`, {headers: headers}));    
+     return (this.http.get<Restaurant>(`https://developers.zomato.com/api/v2.1/restaurant?res_id=${restaurantId}`, {headers: headers}));    
+     
+   }
 }
