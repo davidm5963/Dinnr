@@ -1,12 +1,11 @@
 <div id="viewport">
   <ul class="stack" swing-stack  [stackConfig]="stackConfig"  #myswing1 (throwout)="onThrowOut($event)">
-    <li swing-card #restaurantCards [ngClass]="restaurant.restaurant.name" *ngFor="let restaurant of restaurants">
+    <li swing-card #restaurantCards clas="overlay" [ngClass]="restaurant.restaurant.id" *ngFor="let restaurant of restaurants; let i = index">
 
-      <app-restaurant-card [restaurant]=restaurant.restaurant>
+      <app-restaurant-card [restaurant]=restaurant.restaurant [index]=i>
       </app-restaurant-card>
-      <div class="overlay">
-        YUM!
-      </div>  
+      
     </li>
+
   </ul>
 </div>
