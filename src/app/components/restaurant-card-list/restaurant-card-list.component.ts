@@ -30,13 +30,10 @@ export class RestaurantCardListComponent implements OnInit, AfterViewInit {
         allowedDirections: [Direction.LEFT, Direction.RIGHT],
         // Now need to send offsetX and offsetY with element instead of just offset
         throwOutConfidence: (offsetX, offsetY, element) => {
-          let throwPercentage = Math.min(Math.max(Math.abs(offsetX) / (element.offsetWidth / 1), Math.abs(offsetY) / (element.offsetHeight / 1)), 1);
+          let throwPercentage = Math.min(Math.max(Math.abs(offsetX) / (element.offsetWidth / 1.5), Math.abs(offsetY) / (element.offsetHeight / 1)), 1);
           console.log("THROW PERCECNTAGE: " + throwPercentage + Direction);
           console.log("Offset right: " + offsetX);
           console.log("Offset down: " + offsetY);
-
-          element.getElementsByClassName("overlay").item(0).setAttribute("style", `opacity: ${throwPercentage.toString()}; 
-                                                                                   background-color: ${offsetX > 100 ? 'rgba(34, 212, 24, .5)' : 'rgba(214, 29, 24, .5)'}`)
 
           return throwPercentage;
         },
