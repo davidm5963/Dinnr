@@ -1,7 +1,7 @@
 #viewport {
     width: 500px;
     height: 500px;
-    margin: 100px auto 0;
+    margin: 10px auto 0;
     position: relative; }
     #viewport .stack {
       top: 100px;
