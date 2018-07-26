@@ -10,3 +10,8 @@
     font-size: 60px;
     transition: .3s ease;
 }
+
+.restaurant-card{
+    height: 550px;
+    width: 450px;
+}
