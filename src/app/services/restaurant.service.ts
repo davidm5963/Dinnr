@@ -5,7 +5,10 @@ import { HttpClient, HttpHandler, HttpHeaders, HttpParams } from '@angular/commo
 
 import { map } from 'rxjs/operators';
 import { Restaurant } from '../models/restaurant.model';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { Observable, merge, from } from 'rxjs';
+import { combineLatest } from 'rxjs/operators'
+import { promise } from 'protractor';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +17,10 @@ export class RestaurantService {
 
   private API_KEY: string = environment.zomato.ZOMATO_API_KEY;
   private API_URL: string = environment.zomato.ZOMATO_API_URL;
-  
+  private GOOGLE_API_KEY: string = environment.google.GOOGLE_API_KEY;
+  private SEARCH_ENGINE_KEY: string = environment.google.CUSTOM_SEARCH_ENGINE_KEY;
+
+  likes: AngularFirestoreCollection<string>; 
 
   constructor(private http: HttpClient, private afs: AngularFirestore) { 
   }
@@ -23,11 +29,17 @@ export class RestaurantService {
 
     let headers = new HttpHeaders().append('user-key',  this.API_KEY);    
 
-    return this.http.get<Restaurant[]>(this.API_URL+`&start=60&lat=${lat}&lon=${lng}&radius=100000`, {headers: headers});
+    return this.http.get<Restaurant[]>(this.API_URL+`&start=50&count=2&lat=${lat}&lon=${lng}&radius=100000`, {headers: headers});
   }
 
   getRestaurantImages(restaurant: Restaurant){
-
-    return this.http.get<any[]>('https://www.googleapis.com/customsearch/v1?q=swensons&cx=015166106935496837655%3A1lg9i5pxeb0&num=3&searchType=image&key=AIzaSyAG_-f5e0-q6QzlkASMKYINbLmo_NhPS2Q');
+    return this.http.get<any[]>(`https://www.googleapis.com/customsearch/v1?q=${restaurant.name}&cx=${this.SEARCH_ENGINE_KEY}&num=2&searchType=image&key=${this.GOOGLE_API_KEY}`);
   }
+
+  addToLikes(restaurantId: string){
+    console.log(restaurantId)
+      this.afs.collection("likes").doc(restaurantId).set({restaurantId: restaurantId});
+  }
+
+  
 }
