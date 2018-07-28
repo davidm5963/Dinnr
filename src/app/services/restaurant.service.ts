@@ -20,7 +20,7 @@ export class RestaurantService {
   private GOOGLE_API_KEY: string = environment.google.GOOGLE_API_KEY;
   private SEARCH_ENGINE_KEY: string = environment.google.CUSTOM_SEARCH_ENGINE_KEY;
 
-  likes: AngularFirestoreCollection<string>; 
+  likes: AngularFirestoreCollection<Restaurant>; 
 
   constructor(private http: HttpClient, private afs: AngularFirestore) { 
   }
@@ -29,7 +29,7 @@ export class RestaurantService {
 
     let headers = new HttpHeaders().append('user-key',  this.API_KEY);    
 
-    return this.http.get<Restaurant[]>(this.API_URL+`&start=50&count=2&lat=${lat}&lon=${lng}&radius=100000`, {headers: headers});
+    return this.http.get<Restaurant[]>(this.API_URL+`&start=50&count=20&lat=${lat}&lon=${lng}&radius=100000`, {headers: headers});
   }
 
   getRestaurantImages(restaurant: Restaurant){
@@ -37,12 +37,13 @@ export class RestaurantService {
   }
 
   addToLikes(restaurantId: string){
-    console.log(restaurantId)
-      this.afs.collection("likes").doc(restaurantId).set({restaurantId: restaurantId});
+      this.getRestaurantDetails(restaurantId).subscribe(data => {
+        this.afs.collection("likes").doc(restaurantId).set({restaurant: data});        
+      })
   }
 
   getLikes(){   
-    return this.likes = this.afs.collection('likes', ref => ref.orderBy('restaurantId'));  
+    return this.likes = this.afs.collection('likes');  
    }
  
    getRestaurantDetails(restaurantId: string){
