@@ -1,13 +1,33 @@
 .like-list-wrapper{
-    background-color: #ccc;
-    z-index: 1;
+    color: whitesmoke;
+    font-family: "Open Sans", sans-serif;
+    font-size: 1.2em;
+    padding:40px 10px 40px 15px;
+    overflow-y: auto;
+    height: 100vh;
+    position: relative;
+    z-index: 10;
+    background-color: whitesmoke
 }
 
 .card-wrapper{
-    background-color: red;
+    background: url('../assets/images/kitchen_bg.jpg');
     z-index: 0;
 }
 
 .row{
     height: 100%;
+}
+
+::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #555;
 }
